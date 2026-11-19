@@ -1,0 +1,57 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.kotlin
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### TestNG ###
+test-output/
+
+### JSON comparison runtime files ###
+src/test/resources/testFiles/jsonComparisonFiles/latestJsonFiles/
+src/test/resources/testFiles/jsonComparisonFiles/results/
+
+### Allure ###
+allure-results/
+allure-report/
+
+### Extent Reports (if you use them) ###
+reports/
+
+### Logs ###
+logs/
+*.log
+
+### OS ###
+Thumbs.db

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%boldCyan(%d{yyyy-MM-dd HH:mm:ss}) [%highlight(%level)] %boldYellow(%logger{1}) -- %n%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root Logger (Suppress All Logs Globally) -->
+    <root level="OFF">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Enable Logging ONLY for Your Package -->
+    <logger name="com.vassar.ce.page" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+</configuration>
