@@ -29,8 +29,8 @@ public class CommonMethods {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
-    public static String getClasspathFileAsTempPath(String relativePath) {
-        String normalized = relativePath.replace("\\", "/");
+    public static Path getClasspathFileAsTempPath(Path relativePath) {
+        String normalized = relativePath.toString().replace("\\", "/");
         try (InputStream stream = CommonMethods.class.getClassLoader()
                 .getResourceAsStream("testFiles/" + normalized)) {
             if (stream == null) {
@@ -40,13 +40,13 @@ public class CommonMethods {
             Path tempFile = Files.createTempFile("testfile-", "-" + fileName);
             tempFile.toFile().deleteOnExit();
             Files.copy(stream, tempFile, StandardCopyOption.REPLACE_EXISTING);
-            return tempFile.toAbsolutePath().toString();
+            return tempFile.toAbsolutePath();
         } catch (IOException e) {
             throw new RuntimeException("Failed to extract file: " + relativePath, e);
         }
     }
 
-    public static String createAndGetTestFilesSubdirectory(String relativeSubfolder) {
+    public static Path createAndGetTestFilesSubdirectory(Path relativeSubfolder) {
         Path testFilesDir = Paths.get(
                 System.getProperty("user.dir"),
                 "src", "test", "resources", "testFiles"
@@ -59,7 +59,7 @@ public class CommonMethods {
 
         try {
             Files.createDirectories(downloadDir);
-            return downloadDir.toString();
+            return downloadDir;
         } catch (IOException e) {
             throw new RuntimeException("Failed to create download directory: " + downloadDir, e);
         }

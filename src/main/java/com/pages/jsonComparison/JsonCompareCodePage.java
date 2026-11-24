@@ -51,17 +51,17 @@ public class JsonCompareCodePage {
         String stationName = "HARDA-QA";
         String oldJsonFilePath = "/home/satish/Desktop/Automation Folders/Kavach-Automation/src/test/resources/testFiles/jsonComparisonFiles/previousJsonFiles/HARDA-QA_MERGED_OLD.json";
         String newJsonFilePath = "/home/satish/Desktop/Automation Folders/Kavach-Automation/src/test/resources/testFiles/jsonComparisonFiles/latestJsonFiles/HARDA-QA_MERGED.json";
-        new JsonCompareCodePage().comparePreviousAndLatestMergedJsonFiles(stationName, oldJsonFilePath, newJsonFilePath);
+        new JsonCompareCodePage().comparePreviousAndLatestMergedJsonFiles(stationName, Path.of(oldJsonFilePath), Path.of(newJsonFilePath));
     }
 
     public void comparePreviousAndLatestMergedJsonFiles(String stationName) throws IOException {
-        String oldJsonFilePath = CommonMethods.getClasspathFileAsTempPath("jsonComparisonFiles/previousJsonFiles/" + stationName + "_MERGED_OLD.json");
-        String newJsonFilePath = Paths.get(CommonMethods.createAndGetTestFilesSubdirectory("jsonComparisonFiles/latestJsonFiles"), stationName + "_MERGED.json").toString();
+        Path oldJsonFilePath = CommonMethods.getClasspathFileAsTempPath(Path.of("jsonComparisonFiles/previousJsonFiles/" + stationName + "_MERGED_OLD.json"));
+        Path newJsonFilePath = CommonMethods.createAndGetTestFilesSubdirectory(Path.of("jsonComparisonFiles/latestJsonFiles").resolve(stationName + "_MERGED.json"));
         new JsonCompareCodePage().comparePreviousAndLatestMergedJsonFiles(stationName, oldJsonFilePath, newJsonFilePath);
     }
 
     // Execution
-    public void comparePreviousAndLatestMergedJsonFiles(String stationName, String oldJsonFilePath, String newJsonFilePath) throws IOException {
+    public void comparePreviousAndLatestMergedJsonFiles(String stationName, Path oldJsonFilePath, Path newJsonFilePath) throws IOException {
         Path resultsDirectory = createResultsDirectory(stationName);
         Path sortedOldJsonPath = resultsDirectory.resolve(stationName + "_old_sorted.json");
         Path sortedNewJsonPath = resultsDirectory.resolve(stationName + "_new_sorted.json");
@@ -111,14 +111,14 @@ public class JsonCompareCodePage {
     // Helper Methods
     // HM1
     private Path createResultsDirectory(String stationName) throws IOException {
-        Path resultsDirectory = Paths.get(CommonMethods.createAndGetTestFilesSubdirectory("jsonComparisonFiles/results")).resolve(stationName);
+        Path resultsDirectory = CommonMethods.createAndGetTestFilesSubdirectory(Path.of("jsonComparisonFiles","results")).resolve(stationName);
         Files.createDirectories(resultsDirectory);
         return resultsDirectory;
     }
 
     // HM2
-    private static void createSortedInputJsonFileCopy(String inputFilePath, Path outputFilePath) throws IOException {
-        JsonNode json = sortMainKeys(readJsonFile(Path.of(inputFilePath)));
+    private static void createSortedInputJsonFileCopy(Path inputFilePath, Path outputFilePath) throws IOException {
+        JsonNode json = sortMainKeys(readJsonFile(inputFilePath));
         mapper.writer(new ArrayObjectPrettyPrinter()).writeValue(outputFilePath.toFile(), json);
     }
 

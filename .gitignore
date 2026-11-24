@@ -39,8 +39,8 @@ build/
 test-output/
 
 ### JSON comparison runtime files ###
-src/test/resources/testFiles/jsonComparisonFiles/latestJsonFiles/
-src/test/resources/testFiles/jsonComparisonFiles/results/
+#src/test/resources/testFiles/jsonComparisonFiles/latestJsonFiles/
+#src/test/resources/testFiles/jsonComparisonFiles/results/
 
 ### Allure ###
 allure-results/
