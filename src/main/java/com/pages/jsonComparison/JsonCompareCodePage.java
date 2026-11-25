@@ -49,14 +49,14 @@ public class JsonCompareCodePage {
     // Main Method
     public static void main(String[] args) throws IOException {
         String stationName = "HARDA-QA";
-        String oldJsonFilePath = "/home/satish/Desktop/Automation Folders/Kavach-Automation/src/test/resources/testFiles/jsonComparisonFiles/previousJsonFiles/HARDA-QA_MERGED_OLD.json";
-        String newJsonFilePath = "/home/satish/Desktop/Automation Folders/Kavach-Automation/src/test/resources/testFiles/jsonComparisonFiles/latestJsonFiles/HARDA-QA_MERGED.json";
-        new JsonCompareCodePage().comparePreviousAndLatestMergedJsonFiles(stationName, Path.of(oldJsonFilePath), Path.of(newJsonFilePath));
+        Path oldJsonFilePath = Path.of("/home/satish/Desktop/Automation Folders/Kavach-Automation/src/test/resources/testFiles/jsonComparisonFiles/previousJsonFiles").resolve("HARDA-QA_MERGED_OLD.json");
+        Path newJsonFilePath = Path.of("/home/satish/Desktop/Automation Folders/Kavach-Automation/src/test/resources/testFiles/jsonComparisonFiles/latestJsonFiles").resolve("HARDA-QA_MERGED.json");
+        new JsonCompareCodePage().comparePreviousAndLatestMergedJsonFiles(stationName, oldJsonFilePath, newJsonFilePath);
     }
 
     public void comparePreviousAndLatestMergedJsonFiles(String stationName) throws IOException {
         Path oldJsonFilePath = CommonMethods.getClasspathFileAsTempPath(Path.of("jsonComparisonFiles/previousJsonFiles/" + stationName + "_MERGED_OLD.json"));
-        Path newJsonFilePath = CommonMethods.createAndGetTestFilesSubdirectory(Path.of("jsonComparisonFiles/latestJsonFiles").resolve(stationName + "_MERGED.json"));
+        Path newJsonFilePath = CommonMethods.getClasspathFileAsTempPath(Path.of("jsonComparisonFiles/latestJsonFiles/" + stationName + "_MERGED.json"));
         new JsonCompareCodePage().comparePreviousAndLatestMergedJsonFiles(stationName, oldJsonFilePath, newJsonFilePath);
     }
 
